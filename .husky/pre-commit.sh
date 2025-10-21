@@ -1,3 +1,3 @@
 # .husky/pre-commit
-echo "Commitando aqui pae"
+echo "Commitando aqui eh nois"
 exit 1
