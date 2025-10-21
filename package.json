@@ -22,7 +22,7 @@
   },
   "lint-staged": {
     "*.ts": [
-      "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+      "eslint --fix",
       "prettier --write"
     ]
   },
