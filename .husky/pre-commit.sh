@@ -1,1 +1,3 @@
-npx --no-install lint-staged
+# .husky/pre-commit
+echo "Commitando aqui pae"
+exit 1
