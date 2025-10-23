@@ -15,11 +15,12 @@ import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { UUID } from 'crypto';
 
-@Controller('customer')
+@Controller('customers')
 export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
 
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   create(@Body() createCustomerDto: CreateCustomerDto) {
     return this.customerService.create(createCustomerDto);
   }
@@ -31,11 +32,13 @@ export class CustomerController {
   }
 
   @Get(':id')
+  @HttpCode(HttpStatus.OK)
   findOne(@Param('id', new ParseUUIDPipe()) id: UUID) {
     return this.customerService.findOne(id);
   }
 
   @Patch(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   update(
     @Param('id', new ParseUUIDPipe()) id: UUID,
     @Body() updateCustomerDto: UpdateCustomerDto,
@@ -44,6 +47,7 @@ export class CustomerController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id', new ParseUUIDPipe()) id: UUID) {
     return this.customerService.remove(id);
   }

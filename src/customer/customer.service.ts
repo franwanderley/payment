@@ -17,13 +17,14 @@ export class CustomerService {
     private readonly customerRepository: Repository<Customer>,
   ) {}
   async create(createCustomerDto: CreateCustomerDto) {
-    await this.validUser(createCustomerDto);
+    await this.validCustomer(createCustomerDto);
 
     const customer = this.customerRepository.create(createCustomerDto);
 
     return await this.customerRepository.save(customer);
   }
-  async validUser(createCustomerDto: CreateCustomerDto): Promise<void> {
+
+  async validCustomer(createCustomerDto: CreateCustomerDto): Promise<void> {
     const userByEmail = await this.customerRepository.findOneBy({
       email: createCustomerDto.email,
     });

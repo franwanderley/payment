@@ -1,5 +1,6 @@
 import { UUID } from 'crypto';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Charge } from 'src/charge/entities/charge.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('customers')
 export class Customer {
@@ -17,4 +18,7 @@ export class Customer {
 
   @Column({ type: 'varchar', length: 15, nullable: false })
   phone: string;
+
+  @OneToMany(() => Charge, (charges) => charges.customer)
+  charges: Charge[];
 }
