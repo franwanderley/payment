@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateChargeDto } from './dto/create-charge.dto';
 import { UpdateChargeDto } from './dto/update-charge.dto';
 import { UUID } from 'crypto';
@@ -29,7 +33,9 @@ export class ChargeService {
   }
 
   findAll() {
-    return this.chargeRepository.find();
+    return this.chargeRepository.find({
+      relations: ['customer', 'creditCard', 'bankSlip', 'instantPay'],
+    });
   }
 
   async findOne(id: UUID) {
@@ -41,31 +47,29 @@ export class ChargeService {
   }
 
   async findCustomerById(id: UUID | undefined): Promise<Customer> {
+    if (!id) {
+      throw new BadRequestException('id its required');
+    }
     const customer = await this.customerRepository.findOneBy({ id });
     if (!customer) {
-      throw new NotFoundException(`Customer with ID "${id}" not found`);
+      throw new BadRequestException(`Customer with ID "${id}" not found`);
     }
     return customer;
   }
 
   async update(id: UUID, updateChargeDto: UpdateChargeDto) {
     const customer = await this.findCustomerById(updateChargeDto.customerId);
-
     const charge = await this.chargeRepository.preload({
       id,
+      ...updateChargeDto,
       customer,
-      status: updateChargeDto.status,
-      creditCard: updateChargeDto.creditCard,
-      bankSlip: updateChargeDto.bankSlip,
-      instantPay: updateChargeDto.instantPay,
-      amount: updateChargeDto.amount,
-      currency: updateChargeDto.currency,
-      methodPay: updateChargeDto.methodPay,
-    } as Charge); // TODO fazer map automático
+    } as Charge);
+
     if (!charge) {
       throw new NotFoundException(`Charge with ID "${id}" not found`);
     }
-    await this.chargeRepository.save(charge);
+
+    return this.chargeRepository.save(charge);
   }
 
   async remove(id: UUID) {

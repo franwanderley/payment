@@ -6,10 +6,17 @@ import { Charge } from './entities/charge.entity';
 import { CreditCard } from './entities/credit-card.entity';
 import { bankSlip } from './entities/bank-slip.entity';
 import { InstantPay } from './entities/instant-pay.entity';
+import { Customer } from 'src/customer/entities/customer.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Charge, CreditCard, bankSlip, InstantPay]),
+    TypeOrmModule.forFeature([
+      Charge,
+      CreditCard,
+      bankSlip,
+      InstantPay,
+      Customer,
+    ]),
   ],
   controllers: [ChargeController],
   providers: [ChargeService],

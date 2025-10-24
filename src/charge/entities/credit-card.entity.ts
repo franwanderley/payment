@@ -1,12 +1,6 @@
 import { UUID } from 'crypto';
 import { Charge } from './charge.entity';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('credit_card')
 export class CreditCard {
@@ -20,6 +14,5 @@ export class CreditCard {
   parcelAmount: number;
 
   @OneToOne(() => Charge)
-  @JoinColumn()
   charge: Charge;
 }

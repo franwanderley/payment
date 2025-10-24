@@ -61,7 +61,7 @@ export class CustomerService {
       ...updateCustomerDto,
     });
     if (!user) {
-      throw new NotFoundException(`User with ID "${id}" not found`);
+      throw new NotFoundException(`Customer with ID "${id}" not found`);
     }
     await this.customerRepository.save(user);
   }

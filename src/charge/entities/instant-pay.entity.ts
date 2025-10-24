@@ -1,12 +1,6 @@
 import { UUID } from 'crypto';
 import { Charge } from './charge.entity';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('instant_pay')
 export class InstantPay {
@@ -17,6 +11,5 @@ export class InstantPay {
   instantKey: string;
 
   @OneToOne(() => Charge)
-  @JoinColumn()
   charge: Charge;
 }

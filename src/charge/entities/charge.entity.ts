@@ -3,6 +3,7 @@ import { Customer } from 'src/customer/entities/customer.entity';
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -22,21 +23,24 @@ export class Charge {
   @Column({ type: 'varchar', length: 3, nullable: false })
   currency: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: false })
+  @Column({ type: 'varchar', length: 20, nullable: false, default: 'pending' })
   status: 'pending' | 'payd' | 'expired' | 'failed';
 
-  @Column({ type: 'varchar', length: 20, nullable: false, default: 'pending' })
+  @Column({ type: 'varchar', length: 20 })
   methodPay: 'credit_card' | 'bank_slip' | 'instant_pay';
 
-  @ManyToOne(() => Customer, (customers) => customers.id)
+  @ManyToOne(() => Customer, (customer) => customer.charges)
   customer: Customer;
 
   @OneToOne(() => bankSlip, { cascade: true })
+  @JoinColumn()
   bankSlip: bankSlip;
 
   @OneToOne(() => CreditCard, { cascade: true })
+  @JoinColumn()
   creditCard: CreditCard;
 
   @OneToOne(() => InstantPay, { cascade: true })
+  @JoinColumn()
   instantPay: InstantPay;
 }
