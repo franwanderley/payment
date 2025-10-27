@@ -27,7 +27,6 @@ export class ChargeService {
       currency: createChargeDto.currency,
       methodPay: createChargeDto.methodPay,
       customer,
-      status: 'pending',
     } as Charge);
     return await this.chargeRepository.save(charge);
   }
@@ -39,7 +38,10 @@ export class ChargeService {
   }
 
   async findOne(id: UUID) {
-    const charge = await this.chargeRepository.findOneBy({ id });
+    const charge = await this.chargeRepository.findOne({
+      where: { id },
+      relations: ['customer', 'creditCard', 'bankSlip', 'instantPay'],
+    });
     if (!charge) {
       throw new NotFoundException(`charge with ID "${id}" not found`);
     }
