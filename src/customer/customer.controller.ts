@@ -9,11 +9,13 @@ import {
   HttpStatus,
   HttpCode,
   ParseUUIDPipe,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { UUID } from 'crypto';
+import { IdempotencyInterceptor } from 'src/idempotency.interceptor';
 
 @Controller('customers')
 export class CustomerController {
@@ -21,6 +23,7 @@ export class CustomerController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
+  @UseInterceptors(IdempotencyInterceptor)
   create(@Body() createCustomerDto: CreateCustomerDto) {
     return this.customerService.create(createCustomerDto);
   }

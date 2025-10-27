@@ -9,11 +9,13 @@ import {
   HttpCode,
   HttpStatus,
   ParseUUIDPipe,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ChargeService } from './charge.service';
 import { CreateChargeDto } from './dto/create-charge.dto';
 import { UpdateChargeDto } from './dto/update-charge.dto';
 import { UUID } from 'crypto';
+import { IdempotencyInterceptor } from '../idempotency.interceptor';
 
 @Controller('charges')
 export class ChargeController {
@@ -21,6 +23,7 @@ export class ChargeController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
+  @UseInterceptors(IdempotencyInterceptor)
   create(@Body() createChargeDto: CreateChargeDto) {
     return this.chargeService.create(createChargeDto);
   }
@@ -39,6 +42,7 @@ export class ChargeController {
 
   @Patch(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
+  @UseInterceptors(IdempotencyInterceptor)
   update(
     @Param('id', new ParseUUIDPipe()) id: UUID,
     @Body() updateChargeDto: UpdateChargeDto,
