@@ -21,6 +21,7 @@ API RESTful para processamento de pagamentos, construída com NestJS e TypeScrip
 
 - **Node.js**: Ambiente de execução JavaScript.
 - **NestJS**: Framework Node.js progressivo para construir aplicações eficientes e escaláveis.
+= **Husky**: Para validar lint ao commitar.
 - **TypeScript**: Superset do JavaScript que adiciona tipagem estática.
 - **TypeORM**: ORM para TypeScript e JavaScript.
 - **PostgreSQL**: Banco de dados relacional (ou outro de sua preferência compatível com TypeORM).
