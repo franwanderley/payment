@@ -72,7 +72,6 @@ export class ChargeController {
   @ApiOperation({ summary: 'Atualiza uma cobrança' })
   @ApiParam({ name: 'id', description: 'ID da cobrança' })
   @ApiNoContentResponse({ description: 'Cobrança atualizada com sucesso.' })
-  @ApiNotFoundResponse({ description: 'Cobrança não encontrada.' })
   @ApiBody({ type: UpdateChargeDto })
   @ApiHeader({
     name: 'idempotency-key',

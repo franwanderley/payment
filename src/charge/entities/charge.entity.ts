@@ -32,15 +32,15 @@ export class Charge {
   @ManyToOne(() => Customer, (customer) => customer.charges)
   customer: Customer;
 
-  @OneToOne(() => bankSlip, { cascade: true })
+  @OneToOne(() => bankSlip, { cascade: true, onUpdate: 'SET NULL' })
   @JoinColumn()
-  bankSlip: bankSlip;
+  bankSlip: bankSlip | null;
 
-  @OneToOne(() => CreditCard, { cascade: true })
+  @OneToOne(() => CreditCard, { cascade: true, onUpdate: 'SET NULL' })
   @JoinColumn()
-  creditCard: CreditCard;
+  creditCard: CreditCard | null;
 
-  @OneToOne(() => InstantPay, { cascade: true })
+  @OneToOne(() => InstantPay, { cascade: true, onUpdate: 'SET NULL' })
   @JoinColumn()
-  instantPay: InstantPay;
+  instantPay: InstantPay | null;
 }
