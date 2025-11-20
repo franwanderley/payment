@@ -9,7 +9,7 @@ import { UUID } from 'crypto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Charge } from './entities/charge.entity';
 import { DataSource, EntityManager, Repository } from 'typeorm';
-import { Customer } from 'src/customer/entities/customer.entity';
+import { Customer } from '../customer/entities/customer.entity';
 
 @Injectable()
 export class ChargeService {

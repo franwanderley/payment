@@ -1,5 +1,5 @@
 import { UUID } from 'crypto';
-import { Charge } from 'src/charge/entities/charge.entity';
+import { Charge } from '../../charge/entities/charge.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('customers')

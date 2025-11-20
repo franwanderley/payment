@@ -6,7 +6,7 @@ import { Charge } from './entities/charge.entity';
 import { CreditCard } from './entities/credit-card.entity';
 import { bankSlip } from './entities/bank-slip.entity';
 import { InstantPay } from './entities/instant-pay.entity';
-import { Customer } from 'src/customer/entities/customer.entity';
+import { Customer } from '../customer/entities/customer.entity';
 import { IdempotencyInterceptor } from '../idempotency.interceptor';
 
 @Module({

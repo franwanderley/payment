@@ -26,7 +26,7 @@ import {
   ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
-import { IdempotencyInterceptor } from 'src/idempotency.interceptor';
+import { IdempotencyInterceptor } from '../idempotency.interceptor';
 
 @ApiTags('customers')
 @Controller('customers')

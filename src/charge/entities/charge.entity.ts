@@ -1,5 +1,5 @@
 import { UUID } from 'crypto';
-import { Customer } from 'src/customer/entities/customer.entity';
+import { Customer } from '../../customer/entities/customer.entity';
 import {
   Column,
   Entity,
